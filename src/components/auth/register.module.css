@@ -1,0 +1,23 @@
+.enabled {
+  display: flex;
+}
+
+.disabled {
+  display: none;
+}
+
+.change {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 0vh;
+}
+
+.change section {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: -6rem;
+}

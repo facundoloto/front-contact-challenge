@@ -1,0 +1,7 @@
+@media (max-width: 768px) {
+
+    /* Apply styles for screens with a maximum width of 768px */
+    .tableResponsive {
+        width: 40%;
+    }
+}
