@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 const jwt = cookies.get('jwt');
-const routesApi = "http://localhost:8000/v1/api";
+const routesApi = "https://contact-oxa5.onrender.com/v1/api";
 
 const api = axios.create({
     baseURL: routesApi,
