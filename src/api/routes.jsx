@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 const jwt = cookies.get('jwt');
-const routesApi = "https://contact-oxa5.onrender.com/v1/api";
+const routesApi = "http://localhost:8000/v1/api";
 
 const api = axios.create({
     baseURL: routesApi,
@@ -102,6 +102,23 @@ export const createContact = async (data) => {
     }
 
 };
+
+
+export const updateContact = async (data) => {
+    console.log(data)
+    const res = await api.put("/contact/update/" + data.id, data);
+    console.log(res)
+    if (res.status === 200) {
+        Swal.fire({
+            icon: "success",
+            title: "success",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+        return res;
+    }
+};
+
 
 export const deleteContact = async (id) => {
 

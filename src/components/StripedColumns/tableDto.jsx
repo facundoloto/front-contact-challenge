@@ -4,7 +4,7 @@ const mapDtoToViewModel = (dto) => ({
     name: dto.name,
     lastName: dto.lastName,
     email: dto.email,
-    phone: dto.number
+    number: dto.number
 });
 
 export default mapDtoToViewModel;
