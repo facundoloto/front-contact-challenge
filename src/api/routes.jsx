@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 const jwt = cookies.get('jwt');
-const routesApi = "http://localhost:8000/v1/api";
+const routesApi = "https://contact-oxa5.onrender.com/v1/api";
 
 const api = axios.create({
     baseURL: routesApi,
@@ -71,7 +71,14 @@ export const loginBySystem = async (data) => {
 
 export const getAllContactsByUser = async (id) => {
     try {
-        const res = await api.get(routesApi + '/contact/user/' + id);
+        const cookies = new Cookies();
+        const jwt = cookies.get('jwt');
+        const res = await axios.get(routesApi + '/contact/user/' + id, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${jwt}`,
+            }
+        });
         return res.data;
     }
     catch (error) {
