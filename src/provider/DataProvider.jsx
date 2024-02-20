@@ -1,27 +1,29 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { createContact, getAllContactsByUser, deleteContact } from '../api/routes';
+import { createContact, getAllContactsByUser, deleteContact, updateContact } from '../api/routes';
 import { useAuthStore } from '../store/authStore';
 import Cookies from 'universal-cookie';
 import Swal from 'sweetalert2';
 import mapDtoToViewModel from '../components/StripedColumns/tableDto';
-// Creamos un contexto para el estado compartido
+
 const DataContext = createContext();
-const cookie = new Cookies();
-// Hook personalizado para acceder al contexto
+
 export const useDataContext = () => {
     return useContext(DataContext);
 };
 
-// Proveedor del contexto
 export const DataProvider = ({ children }) => {
     const [data, setData] = useState([]);
     const idUser = useAuthStore((state) => state.idUser);
 
     const fetchDataAllContact = async () => {
-        const jwt = cookie.get('jwt');
-        if (jwt) {
-            const response = await getAllContactsByUser(idUser);
-            setData(response.map(mapDtoToViewModel));
+        const response = await getAllContactsByUser(idUser);
+        setData(response.map(mapDtoToViewModel));
+    };
+
+    const updateData = async (data) => {
+        const res = await updateContact(data);
+        if (res.status === 200) {
+            await fetchDataAllContact();
         }
     };
 
@@ -63,6 +65,7 @@ export const DataProvider = ({ children }) => {
         data,
         fetchDataAllContact,
         addData,
+        updateData,
         deleteData
     };
 
