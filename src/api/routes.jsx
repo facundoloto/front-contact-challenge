@@ -5,6 +5,7 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 const jwt = cookies.get('jwt');
+
 const routesApi = "https://contact-oxa5.onrender.com/v1/api";
 // const routesApi = "http://localhost:8000/v1/api";
 
@@ -65,8 +66,11 @@ export const loginBySystem = async (data) => {
     } catch (error) {
         // Handle Axios error
         if (error.response || error.response.status === 401) {
-            console.error('Unauthorized: Please check your credentials.');
-
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Try again!",
+            });
         }
     }
 };
