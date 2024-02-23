@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { createContact, getAllContactsByUser, deleteContact, updateContact } from '../api/routes';
 import { useAuthStore } from '../store/authStore';
-import Cookies from 'universal-cookie';
 import Swal from 'sweetalert2';
 import mapDtoToViewModel from '../components/StripedColumns/tableDto';
 

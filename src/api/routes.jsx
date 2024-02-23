@@ -2,9 +2,11 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Cookies from 'universal-cookie';
 
+
 const cookies = new Cookies();
 const jwt = cookies.get('jwt');
 const routesApi = "https://contact-oxa5.onrender.com/v1/api";
+// const routesApi = "http://localhost:8000/v1/api";
 
 const api = axios.create({
     baseURL: routesApi,
@@ -93,7 +95,6 @@ export const getAllContactsByUser = async (id) => {
 export const createContact = async (data) => {
 
     const response = await api.post('/contact/', data);
-    console.log(response)
     if (!response.status === 200) {
         throw new Error('error send post');
     }
@@ -112,9 +113,7 @@ export const createContact = async (data) => {
 
 
 export const updateContact = async (data) => {
-    console.log(data)
     const res = await api.put("/contact/update/" + data.id, data);
-    console.log(res)
     if (res.status === 200) {
         Swal.fire({
             icon: "success",
