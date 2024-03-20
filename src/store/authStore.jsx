@@ -3,7 +3,6 @@ import { persist } from 'zustand/middleware';
 import Cookies from 'universal-cookie';
 import Swal from "sweetalert2";
 
-const cookies = new Cookies();
 
 export const useAuthStore = create(persist((set) => ({
   isAuthenticated: false,

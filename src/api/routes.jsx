@@ -1,13 +1,9 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import Cookies from 'universal-cookie';
 
-
-const cookies = new Cookies();
-const jwt = cookies.get('jwt');
-
+const jwt =   localStorage.getItem("jwt");
 const routesApi = "https://contact-oxa5.onrender.com/v1/api";
-// const routesApi = "http://localhost:8000/v1/api";
+//const routesApi = "http://localhost:8000/v1/api";
 
 const api = axios.create({
     baseURL: routesApi,
@@ -49,9 +45,8 @@ export const loginBySystem = async (data) => {
     try {
         const dataLogin = { email: data.email, password: data.password };
         const response = await axios.post(routesApi + '/auth/login/', dataLogin);
-        cookies.set("jwt", response.data.jwt);
+        localStorage.setItem("jwt", response.data.jwt);
 
-        // Handle successful response
         if (response.status == 202) {
             Swal.fire({
                 icon: "success",
@@ -77,8 +72,6 @@ export const loginBySystem = async (data) => {
 
 export const getAllContactsByUser = async (id) => {
     try {
-        const cookies = new Cookies();
-        const jwt = cookies.get('jwt');
         const res = await axios.get(routesApi + '/contact/user/' + id, {
             headers: {
                 'Content-Type': 'application/json',

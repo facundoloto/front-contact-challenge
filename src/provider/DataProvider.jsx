@@ -35,18 +35,18 @@ export const DataProvider = ({ children }) => {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes'
-        }).then(async (result) => {
-            if (result.isConfirmed) {
-                const response = await deleteContact(id);
-                console.log(response)
-                try {
-                    if (response.status === 200) {
-                        const updatedData = data.filter(data => data.id !== id);
-                        setData(updatedData);
+        }).then(
+            async (result) => {
+                if (result.isConfirmed) {
+                    const response = await deleteContact(id);
+                    try {
+                        if (response.status === 200) {
+                            const updatedData = data.filter(data => data.id !== id);
+                            setData(updatedData);
+                        }
+                    } catch (error) {
+                        new Error('It could not delete contact');
                     }
-                } catch (error) {
-                    new Error('It could not delete contact');
-                }
             }
         });
     }

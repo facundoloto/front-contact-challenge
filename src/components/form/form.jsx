@@ -13,9 +13,7 @@ const FormContact = ({ onSubmit, initialValues }) => {
 
     const onSubmitHandler = async (data) => {
         const requestData = { ...data, userId };
-        console.log(requestData)
         await onSubmit(requestData);
-        console.log(data)
     };
 
     useEffect(() => {
